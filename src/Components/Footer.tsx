@@ -1,9 +1,3 @@
-
-
 export default function Footer() {
-  return (
-    <footer>
-      Footer to go here
-    </footer>
-  )
+  return <footer className="text-xs">Footer to go here</footer>;
 }
