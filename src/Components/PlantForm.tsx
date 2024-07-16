@@ -74,7 +74,7 @@ export default function PlantForm() {
     event.preventDefault();
     console.log("FORM DATA: ", formData);
     axios
-      .post("http://localhost:3000/addPlant", formData)
+      .post("/addPlant", formData)
       .then(function (response) {
         console.log(response);
       })
