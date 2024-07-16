@@ -14,6 +14,7 @@ model Plants {
   lastWatered DateTime
   daysSinceWatered Int
   wateredToday Boolean
+  daysTillWatering Int
 
 
   @@map("plant-pal")
