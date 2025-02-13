@@ -27,7 +27,7 @@ export async function getAllPlants() {
   const plants = await prisma.plants.findMany({
     orderBy: [
       {
-        daysTillWatering: "asc",
+        plantName: "asc",
       },
     ],
   });

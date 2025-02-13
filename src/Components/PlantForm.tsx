@@ -9,7 +9,6 @@ export default function PlantForm() {
     axios
       .get("/getPlants")
       .then((response) => {
-        console.log("axios get plants: ", response.data);
         for (const plant of response.data) {
           const now = new Date();
           const last = new Date(plant.lastWatered);
@@ -25,44 +24,21 @@ export default function PlantForm() {
                 daysTillWatering: daysUntil,
                 wateredToday: watered,
               })
-              .then((response) => {
-                console.log("put response: ", response);
-                axios
-                  .get("/getPlant", { params: { id: plant.id } })
-                  .then((response) => {
-                    console.log("single plant: ", response.data);
-                    setPlantList((prevState) => {
-                      [...prevState, response.data];
-                    });
-                  });
-              })
               .catch((error) => {
                 console.log("error in axios put: ", error);
-              });
-          } else {
-            axios
-              .get("/getPlant", { params: { id: plant.id } })
-              .then((response) => {
-                console.log("single plant: ", response.data);
-                setPlantList((prevState) => {
-                  [...prevState, response.data];
-                });
               });
           }
         }
       })
+      .then(() => {
+        axios.get("/getPlants").then((response) => {
+          console.log("SECOND GET PLANTS DATA: ", response.data);
+          setPlantList(response.data);
+        });
+      })
       .catch((error) => {
         console.log("error in axios get plants 1: ", error);
       });
-    // axios
-    //   .get("/getPlants")
-    //   .then((response) => {
-    //     console.log("post update get: ", response.data);
-    //     setPlantList(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.log("error in axios get plants 2: ", error);
-    //   });
   }, [clientWateredToday, submitted]);
 
   const [formData, setFormData] = useState({
@@ -73,15 +49,17 @@ export default function PlantForm() {
   function submitPlant(event) {
     event.preventDefault();
     console.log("FORM DATA: ", formData);
+    console.log("submitted value1: ", submitted);
     axios
       .post("/addPlant", formData)
-      .then(function (response) {
-        console.log(response);
+      .then((response) => {
+        console.log("axios add plant response: ", response);
+        setSubmitted(!submitted);
       })
       .catch(function (error) {
         console.log(error);
       });
-    setSubmitted(!submitted);
+    console.log("submitted value2: ", submitted);
     setFormData((prevState) => ({
       ...prevState,
       plantName: "",
@@ -98,21 +76,18 @@ export default function PlantForm() {
   };
 
   const watered = (plant) => {
-    let clientDaysSinceWatered;
-    let clientWateredToday;
     if (!plant.wateredToday) {
-      clientDaysSinceWatered = 0;
-      clientWateredToday = true;
       axios
         .put("/updateWatered", {
           id: plant.id,
-          wateredToday: clientWateredToday,
-          daysSinceWatered: clientDaysSinceWatered,
+          wateredToday: true,
+          daysSinceWatered: 0,
           daysTillWatering: plant.wateringFreq,
           lastWatered: new Date(),
         })
         .then((response) => {
           console.log("axios put response update watered: ", response);
+          setClientWateredToday(!clientWateredToday);
         })
         .catch((error) => {
           console.log("error in axios put update watered: ", error);
@@ -120,7 +95,6 @@ export default function PlantForm() {
     } else {
       console.log("to fix");
     }
-    setClientWateredToday(!clientWateredToday);
   };
 
   return (

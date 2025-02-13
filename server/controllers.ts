@@ -9,6 +9,7 @@ export async function addPlant(req, res) {
       req.body.daysToWater
     );
     console.log("Plant created in add plant: ", plant);
+    res.send(plant);
   } catch (err) {
     console.log("error in adding plant to db controller: ", err);
     res.sendStatus(501);
