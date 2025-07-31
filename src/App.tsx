@@ -4,13 +4,13 @@ import Body from "./Components/Body";
 
 function App() {
   return (
-    <>
-      <div className="h-screen">
-        <Header />
+    <div className="min-h-screen bg-background text-text font-sans flex flex-col transition-all duration-700">
+      <Header />
+      <main className="flex-grow">
         <Body />
-        <Footer />
-      </div>
-    </>
+      </main>
+      <Footer />
+    </div>
   );
 }
 

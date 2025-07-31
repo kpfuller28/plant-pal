@@ -1,3 +1,71 @@
-/* @tailwind base; */
+/* src/index.css */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Light Theme */
+@layer base {
+  /* :root {
+    --text: #14161a;
+    --background: #eeefe1;
+    --primary: #809990;
+    --secondary: #a8c2a9;
+    --accent: #d2d9bf;
+    --menu: #e6b750;
+  }
+  .dark {
+    --text: #e5e7eb;
+    --background: #1d1e10;
+    --primary: #667f76;
+    --secondary: #3d573e;
+    --accent: #394026;
+    --menu: #e6b750;
+  } */
+
+  /* :root {
+    --text: #14161a;
+    --background: #eee9dd;
+    --primary: #a4b58c;
+    --secondary: #c1cea1;
+    --accent: #b18059;
+  }
+  .dark {
+    --text: #e5e7eb;
+    --background: #221d11;
+    --primary: #62734a;
+    --secondary: #515e31;
+    --accent: #a6764e;
+  } */
+
+  /* :root {
+    --text: #14161a;
+    --background: #fff5e5;
+    --primary: #699b88;
+    --secondary: #c0d8c2;
+    --accent: #ffa724;
+  } */
+
+  :root {
+    --text: #14161a;
+    --background: #fcfaee;
+    --primary: #a4b58c;
+    --secondary: #ecdfcb;
+    --accent: #da8358;
+  }
+  .dark {
+    --text: #dcd7c9;
+    --background: #141916;
+    --primary: #3f4f44;
+    --secondary: #b6aa85;
+    --accent: #f09060;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+}
