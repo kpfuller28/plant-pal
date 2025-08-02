@@ -1,4 +1,3 @@
-import { capitalize } from "@mui/material";
 import * as model from "./models";
 
 export async function addPlant(req, res) {
